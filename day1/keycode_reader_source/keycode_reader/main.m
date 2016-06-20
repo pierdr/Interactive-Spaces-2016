@@ -1,38 +1,19 @@
 #include <ApplicationServices/ApplicationServices.h>
 #import <Foundation/Foundation.h>
 
-int map;
-int remap;
-BOOL justTriggered=false;
+
+
 
 CGEventRef myCGEventCallback(CGEventTapProxy proxy, CGEventType type,
-                  CGEventRef event, void *refcon)
+                             CGEventRef event, void *refcon)
 {
-    if(justTriggered)
-    {
-         justTriggered=false;
-        return nil;
-    }
-    // Paranoid sanity check.
-    if ((type != kCGEventKeyDown) && (type != kCGEventKeyUp))
-        return event;
     
-    // The incoming keycode.
+    if ((type != kCGEventKeyDown))
+        return event;
     CGKeyCode keycode = (CGKeyCode)CGEventGetIntegerValueField(
                                                                event, kCGKeyboardEventKeycode);
     
-   
-   if(keycode==map)
-   {
-       CGEventSourceRef source = CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
-       CGEventRef saveCommandDown = CGEventCreateKeyboardEvent(source, remap, YES);
-       CGEventPost(kCGAnnotatedSessionEventTap, saveCommandDown);
-       CFRelease(saveCommandDown);
-       justTriggered=true;
-       return nil;
-
-   }
-   
+        printf("\n keycode: %d\n",keycode);
     return event;
 }
 
@@ -42,19 +23,6 @@ int main(int argc, const char * argv[])
     CFMachPortRef      eventTap;
     CGEventMask        eventMask;
     CFRunLoopSourceRef runLoopSource;
-    
-    if(argc==3)
-    {
-        char *p;
-        errno = 0;
-        map   = (int) strtol(argv[1], &p, 10);
-        remap = (int) strtol(argv[2], &p, 10);
-        
-    }
-    else
-    {
-        exit(2);
-    }
     
     // Create an event tap. We are interested in key presses.
     eventMask = ((1 << kCGEventKeyDown) | (1 << kCGEventKeyUp));
@@ -77,6 +45,5 @@ int main(int argc, const char * argv[])
     
     // Set it all running.
     CFRunLoopRun();
-    NSLog(@"setup");
     exit(0);
 }
