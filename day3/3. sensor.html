@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://pierdr.github.io/tramontana/lib/bft_min.js"></script>
+    <script>
+    var element=new BFtObject();
+
+    function orientationChanged(orientation){
+      console.log(orientation);
+    }
+    </script>
+  </head>
+  <body onready="element.start('192.168.1.85');">
+    <button onclick="element.subscribeOrientation()">subscribeForOrientation</button>
+  </body>
+</html>
