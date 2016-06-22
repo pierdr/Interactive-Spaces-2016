@@ -1,1 +1,1 @@
-[tramontana reference](https://binaryfutures.squarespace.com/tramontana)
+[tramontana reference](http://binaryfutures.org/tramontana)
