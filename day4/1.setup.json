@@ -1,0 +1,1 @@
+{"nodes":[{"type":"Setup node","title":"Setup Node","x":158,"y":8,"i":{"ip address":"192.168.1.85","port":9092,"reset":0},"vars":{"ip":"192.168.1.85"}},{"type":"IPAddress","title":"ip address","x":28,"y":8,"i":{},"vars":{"field1":"192","field2":"168","field3":"1","field4":"85"}}],"wires":[{"n1":"1","p1":"val","n2":"0","p2":"ip address","color":"hsl(200, 100%, 100%)"}]}
