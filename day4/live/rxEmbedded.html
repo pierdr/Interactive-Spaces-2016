@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://pierdr.github.io/tramontana/lib/bft_min.js"></script>
+    <script>
+    
+    var embedded = new BFtObject();
+
+    $(function(){
+      $("#start").on("click",function(){
+        embedded.start("192.168.1.197");
+      });
+     
+    });
+    $(document).on("rx",function(event,data){
+      console.log(data);
+      embedded.setColorEmbedded(0, 0, 123, 0, 255);
+      
+    });
+    </script>
+  </head>
+  <body>
+    <button id="start">start</button>
+     <button id="rx">subscribe rx</button>
+     
+  </body>
+</html>
