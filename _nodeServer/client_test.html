@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <title>WebSocket Echo Test</title>
+        <script>
+            function init() { 
+            websocket = new WebSocket("ws://77.243.37.122:9092/");
+            
+            websocket.onopen = function() { document.getElementById("output").innerHTML += "<p>> CONNECTED</p>";
+            websocket.send("{\"m\":\"test\",\"value\":\"88\"}");
+            
+            };
+            
+            websocket.onmessage = function(evt) { document.getElementById("output").innerHTML += "<p style='color: blue;'>> RESPONSE: " + evt.data + "</p>"; };
+            
+            websocket.onerror = function(evt) { document.getElementById("output").innerHTML += "<p style='color: red;'>> ERROR: " + evt.data + "</p>"; };
+            }
+            
+            function sendMessage(message) {
+            document.getElementById("output").innerHTML += "<p>> SENT: " + message + "</p>";
+            
+            websocket.send(message);
+            }
+            
+            window.addEventListener("load", init, false);
+            var sendTest=function(){
+                 websocket.send("{\"m\":\"test\",\"action\":\"haptics\"}");
+            
+            }
+        </script>
+    </head>
+    <body>
+        <button id="send" onclick="sendTest()">Send</button>
+        <input onkeypress="if(this.value) {if (window.event.keyCode == 13) { sendMessage(this.value); this.value = null; }}"/>
+        <div id="output"></div>
+
+    </body>
+</html>
