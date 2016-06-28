@@ -31,3 +31,7 @@
 # Debug files
 *.dSYM/
 *.su
+
+_nodeServer/tramontana/
+_nodeServer/bft_min.js
+_nodeServer/node_modules/
